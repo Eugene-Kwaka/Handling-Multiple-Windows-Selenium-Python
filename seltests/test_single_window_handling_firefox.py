@@ -8,8 +8,8 @@ driver_capabilities = {
 	"browserName": "Firefox",
 	"browserVersion": "102.0",
 	"LT:Options": {
-		"username": "kwakaeugene",
-		"accessKey": "3zjuBwGkr45Cnf3BOHxiFFnoFonRSWdynHHLgN7HnZUJjMDaBD",
+		"username": "<username>",
+		"accessKey": "<accesskey>",
 		"platformName": "Windows 10",
 		"build": "MultipleWindowHandlingSeleniumPython",
 		"project": "multiwindowhandling",
@@ -23,9 +23,9 @@ driver_capabilities = {
 
 def test_single_window_firefox():
     # LambdaTest Profile username
-    user_name = "kwakaeugene"
+    user_name = "<username>"
     # LambdaTest Profile access_key
-    accesskey = "3zjuBwGkr45Cnf3BOHxiFFnoFonRSWdynHHLgN7HnZUJjMDaBD"
+    accesskey = "<accesskey>"
     remote_url = "https://" + user_name + ":" + accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(command_executor=remote_url, desired_capabilities=driver_capabilities)
     driver.get('https://www.lambdatest.com/selenium-playground')
