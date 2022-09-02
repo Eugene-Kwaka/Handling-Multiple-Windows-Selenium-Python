@@ -4,22 +4,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import ElementClickInterceptedException
 
 def test_switch_to_parent_window_chrome():
     options = ChromeOptions()
     options.browser_version = '103.0'
     options.platform_name = 'Windows 10'
     lt_options = {}
-    lt_options['username'] = '<username>'
-    lt_options['accesskey'] = '<accesskey>'
+    lt_options['username'] = 'himanshujlambdatest'
+    lt_options['accesskey'] = '7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3'
     lt_options['project'] = 'Switch Back To Parent Window Test'
     lt_options['selenium_version'] = '4.0.0'
     lt_options['w3c'] = True
     options.set_capability('LT:options', lt_options)
     # LambdaTest Profile username
-    user_name = "<username>"
+    user_name = "himanshujlambdatest"
     # LambdaTest Profile access_key
-    accesskey = "<accesskey>"
+    accesskey = "7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3"
     remote_url = "https://" + user_name + ":" + \
         accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
@@ -43,9 +44,18 @@ def test_switch_to_parent_window_chrome():
             page_title = driver.title
             print(f"The page title of child window is: {page_title}")
             if page_title == "Twitter":
-                twitter_signup = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[href="/i/flow/signup"]')))
-                twitter_signup.click()
-                driver.close()
+                try:
+                    twitter_signup = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[href="/i/flow/signup"]')))
+                    twitter_signup.click()
+                    driver.close()
+                except ElementClickInterceptedException:
+                    close_element = driver.find_element(By.CSS_SELECTOR, 'div[aria-label="Close"]')
+                    close_element.click()
+                    twitter_signup = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[href="/i/flow/signup"]')))
+                    twitter_signup.click()
+                    print("Exception Handled")
+                    driver.close()
+
             elif page_title == "Facebook":
                 fb_login = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[aria-label="Accessible login button"]')))
                 fb_login.click()
