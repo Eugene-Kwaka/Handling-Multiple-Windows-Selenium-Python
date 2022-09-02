@@ -11,16 +11,16 @@ def test_multiple_windows_chrome():
     options.browser_version = '103.0'
     options.platform_name = 'Windows 10'
     lt_options = {}
-    lt_options['username'] = 'himanshujlambdatest'
-    lt_options['accesskey'] = '7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3'
+    lt_options['username'] = '<username>'
+    lt_options['accesskey'] = '<accesskey>'
     lt_options['project'] = 'Multiple Window Handling Test'
     lt_options['selenium_version'] = '4.0.0'
     lt_options['w3c'] = True
     options.set_capability('LT:options', lt_options)
     # LambdaTest Profile username
-    user_name = "himanshujlambdatest"
+    user_name = "<username>"
     # LambdaTest Profile access_key
-    accesskey = "7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3"
+    accesskey = "<accesskey>"
     remote_url = "https://" + user_name + ":" + \
         accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
