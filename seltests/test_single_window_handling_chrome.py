@@ -1,4 +1,4 @@
-from multiprocessing.connection import wait
+import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,16 +11,16 @@ def test_single_window_chrome():
     options.browser_version = '103.0'
     options.platform_name = 'Windows 10'
     lt_options = {}
-    lt_options['username'] = '<username>'
-    lt_options['accesskey'] = '<accesskey>'
+    lt_options['username'] = os.environ.get ('LAMBDATEST_USER')
+    lt_options['accesskey'] = os.environ.get ('LAMBDATEST_ACCESSKEY')
     lt_options['project'] = 'SingleWindowHandling'
-    lt_options['selenium_version'] = '4.0.0'
+    lt_options['selenium_version'] = '4.1.2'
     lt_options['w3c'] = True
     options.set_capability('LT:options', lt_options)
     # LambdaTest Profile username
-    user_name = "<username>"
+    user_name = os.environ.get ('LAMBDATEST_USER')
     # LambdaTest Profile access_key
-    accesskey = "<accesskey>"
+    accesskey = os.environ.get ('LAMBDATEST_ACCESSKEY')
     remote_url = "https://" + user_name + ":" + \
         accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
@@ -42,7 +42,6 @@ def test_single_window_chrome():
             driver.switch_to.window(guid)
             print(f"The child guid is: {guid}")
             driver.close()
-            break
 
     driver.quit()
 
