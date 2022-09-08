@@ -11,16 +11,16 @@ def test_switch_to_parent_window_chrome():
     options.browser_version = '103.0'
     options.platform_name = 'Windows 10'
     lt_options = {}
-    lt_options['username'] = os.environ.get ('LAMBDATEST_USER')
-    lt_options['accesskey'] = os.environ.get ('LAMBDATEST_ACCESSKEY')
+    lt_options['username'] = os.environ.get ('LT_USERNAME')
+    lt_options['accesskey'] = os.environ.get ('LT_ACCESS_KEY')
     lt_options['project'] = 'Switch Back To Parent Window Test'
     lt_options['selenium_version'] = '4.0.0'
     lt_options['w3c'] = True
     options.set_capability('LT:options', lt_options)
     # LambdaTest Profile username
-    user_name = os.environ.get ('LAMBDATEST_USER')
+    user_name = os.environ.get ('LT_USERNAME')
     # LambdaTest Profile access_key
-    accesskey = os.environ.get ('LAMBDATEST_ACCESSKEY')
+    accesskey = os.environ.get ('LT_ACCESS_KEY')
     remote_url = "https://" + user_name + ":" + \
         accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
